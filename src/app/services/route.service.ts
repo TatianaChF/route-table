@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Route} from '../models/route.model';
+import {Route, RouteData} from '../models/route.model';
 
 
 @Injectable({
@@ -12,7 +12,7 @@ export class RouteService {
 
   constructor(private http: HttpClient) {}
 
-  getRoutes(): Observable<Route[]> {
-    return this.http.get<Route[]>(this.url);
+  getRoutes(): Observable<RouteData> {
+    return this.http.get<RouteData>(this.url);
   }
 }
