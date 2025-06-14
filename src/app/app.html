@@ -1,7 +1,24 @@
 <main class="main">
   <div>
     <h3>Действующие маршруты IPv4</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Адрес назначения</th>
+          <th>Шлюз</th>
+          <th>Интерфейс</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (route of routes; track route.uuid) {
+          <tr>
+            <td>{{ route.address }}</td>
+            <td>{{ route.gateway }}</td>
+            <td>{{ route.interface }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
   </div>
 </main>
-
-<router-outlet />
