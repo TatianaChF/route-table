@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, map, Observable, tap} from 'rxjs';
 import {Route} from './route.model';
+import {RouteService} from '../services/route.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,4 +9,21 @@ import {Route} from './route.model';
 export class RouteStateService {
   private routesSubject = new BehaviorSubject<Route[]>([]);
   routes$ = this.routesSubject.asObservable();
+
+  state$ = this.routes$.pipe();
+
+  constructor(private routeService: RouteService) {}
+
+  loadRoutes(): Observable<Route[]> {
+    return this.routeService.getRoutes().pipe(
+      map(res => res.data),
+      tap(routes => {
+        console.log(routes);
+      })
+    );
+  }
+
+  refresh() {
+    this.loadRoutes().subscribe();
+  }
 }
