@@ -17,8 +17,10 @@ export class RouteStateService {
   loadRoutes(): Observable<Route[]> {
     return this.routeService.getRoutes().pipe(
       map(res => res.data),
-      tap(routes => {
-        console.log(routes);
+      tap({
+        next: (routes: Route[]) => {
+          this.routesSubject.next(routes);
+        }
       })
     );
   }
