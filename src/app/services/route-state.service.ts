@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, map, Observable, tap} from 'rxjs';
-import {Route} from './route.model';
-import {RouteService} from '../services/route.service';
+import {Route} from '../models/route.model';
+import {RouteService} from './route.service';
 
 @Injectable({
   providedIn: 'root'
