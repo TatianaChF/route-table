@@ -1,0 +1,23 @@
+* {
+  font-family: 'Arial', sans-serif;
+  margin-left: 10px;
+  margin-top: 20px;
+}
+
+.route-table {
+  border-spacing: 0;
+  width: 70%;
+}
+th {
+  background: #DCDCDC;
+  text-align: left;
+}
+td, th {
+  padding: 5px 10px;
+}
+
+td {
+  border-bottom: 1px solid #DCDCDC;
+  border-top: 1px solid #DCDCDC;
+  padding: 15px;
+}
