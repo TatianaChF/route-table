@@ -57,11 +57,11 @@ export class App implements OnInit, OnDestroy {
 
       switch (sort.active) {
         case 'address':
-          return this.compare(a.address, b.address, isAsc);
-          case 'gateway':
-            return this.compare(b.gateway, b.gateway, isAsc);
-            case 'interface':
-              return this.compare(a.interface, b.interface, isAsc);
+          return this.compare(a.address, b.address, isAsc)
+        case 'gateway':
+          return this.compare(b.gateway, b.gateway, isAsc)
+        case 'interface':
+          return this.compare(a.interface, b.interface, isAsc);
         default:
           return 0;
       }
