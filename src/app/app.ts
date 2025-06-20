@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit, OnDestroy} from '@angular/core';
-import {Route, RouteData} from './models/route.model';
+import {Route} from './models/route.model';
 import {CommonModule} from '@angular/common';
 import {RouteStateService} from './services/route-state.service';
 import {finalize, Subscription} from 'rxjs';
