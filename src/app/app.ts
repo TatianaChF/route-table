@@ -3,14 +3,14 @@ import {Route, RouteData} from './models/route.model';
 import {CommonModule} from '@angular/common';
 import {RouteStateService} from './services/route-state.service';
 import {finalize, Subscription} from 'rxjs';
-import {Sort} from '@angular/material/sort';
+import {MatSortModule, Sort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
   standalone: true,
   styleUrl: './app.css',
-  imports: [CommonModule]
+  imports: [CommonModule, MatSortModule]
 })
 export class App implements OnInit, OnDestroy {
   routes: Route[] = [];
