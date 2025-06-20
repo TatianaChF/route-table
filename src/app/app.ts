@@ -44,7 +44,7 @@ export class App implements OnInit, OnDestroy {
     ).subscribe();
   }
 
-  sortData(sort: Sort) {
+  sortData(sort: Sort): void {
     const data = this.routes.slice();
 
     if (!sort.active || sort.direction === '') {
@@ -68,7 +68,7 @@ export class App implements OnInit, OnDestroy {
     })
   }
 
-  compare(a: number | string, b: number | string, isAsc: boolean) {
+  compare(a: number | string, b: number | string, isAsc: boolean): number {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 }
