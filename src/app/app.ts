@@ -16,7 +16,7 @@ export class App implements OnInit, OnDestroy {
   routes: Route[] = [];
   sortedRoutes: Route[] = [];
 
-  private subscriptions = new Subscription();
+  private subscription = new Subscription();
 
   constructor(
     private routeState: RouteStateService,
@@ -29,13 +29,13 @@ export class App implements OnInit, OnDestroy {
       this.sortedRoutes = routes;
       this.cdr.detectChanges();
     });
-    this.subscriptions.add(routeSub);
+    this.subscription.add(routeSub);
 
     this.loadRoutes();
   }
 
   ngOnDestroy() {
-    this.subscriptions.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   loadRoutes() {
