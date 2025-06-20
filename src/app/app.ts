@@ -42,9 +42,29 @@ export class App implements OnInit, OnDestroy {
 
   sortData(sort: Sort) {
     const data = this.routes.slice();
+
     if (!sort.active || sort.direction === '') {
       this.sortedRoutes = data;
       return;
     }
+
+    this.sortedRoutes = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+
+      switch (sort.active) {
+        case 'address':
+          return this.compare(a.address, b.address, isAsc);
+          case 'gateway':
+            return this.compare(b.gateway, b.gateway, isAsc);
+            case 'interface':
+              return this.compare(a.interface, b.interface, isAsc);
+        default:
+          return 0;
+      }
+    })
+  }
+
+  compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 }
