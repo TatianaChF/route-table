@@ -3,16 +3,16 @@
     <h3>Действующие маршруты IPv4</h3>
 
     @if (routes.length > 0) {
-      <table class="route-table">
+      <table matSort (matSortChange)="sortData($event)" class="route-table">
         <thead>
         <tr>
-          <th>Адрес назначения</th>
-          <th>Шлюз</th>
-          <th>Интерфейс</th>
+          <th mat-sort-header="address">Адрес назначения</th>
+          <th mat-sort-header="gateway">Шлюз</th>
+          <th mat-sort-header="interface">Интерфейс</th>
         </tr>
         </thead>
         <tbody>
-          @for (route of routes; track route.uuid) {
+          @for (route of sortedRoutes; track route.uuid) {
             <tr>
               <td>{{ route.address }}</td>
               <td>{{ route.gateway }}</td>
