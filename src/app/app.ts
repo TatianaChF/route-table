@@ -1,9 +1,9 @@
 import {ChangeDetectorRef, Component, OnInit, OnDestroy} from '@angular/core';
 import {Route, RouteData} from './models/route.model';
-import {RouteService} from './services/route.service';
 import {CommonModule} from '@angular/common';
 import {RouteStateService} from './services/route-state.service';
 import {finalize, Subscription} from 'rxjs';
+import {Sort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,7 @@ import {finalize, Subscription} from 'rxjs';
 })
 export class App implements OnInit, OnDestroy {
   routes: Route[] = [];
+  sortedRoutes: Route[] = [];
 
   private subscriptions = new Subscription();
 
@@ -39,7 +40,11 @@ export class App implements OnInit, OnDestroy {
     ).subscribe();
   }
 
-  refresh() {
-    this.routeState.refresh();
+  sortData(sort: Sort) {
+    const data = this.routes.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedRoutes = data;
+      return;
+    }
   }
 }
