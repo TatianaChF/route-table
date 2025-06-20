@@ -18,11 +18,15 @@ export class App implements OnInit, OnDestroy {
 
   private subscriptions = new Subscription();
 
-  constructor(private routeState: RouteStateService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private routeState: RouteStateService,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit() {
     const routeSub = this.routeState.routes$.subscribe(routes => {
       this.routes = routes;
+      this.sortedRoutes = routes;
       this.cdr.detectChanges();
     });
     this.subscriptions.add(routeSub);
