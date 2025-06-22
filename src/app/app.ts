@@ -16,12 +16,20 @@ export class App implements OnInit, OnDestroy {
   routes: Route[] = [];
   sortedRoutes: Route[] = [];
 
-  private subscription = new Subscription();
+  private subscriptions = new Subscription();
 
   constructor(
     private routeState: RouteStateService,
     private cdr: ChangeDetectorRef,
   ) {}
+
+  loadRoutes() {
+    const load = this.routeState.loadRoutes().pipe(
+      finalize(() => console.log('Загрузка завершена'))
+    ).subscribe();
+
+    this.subscriptions.add(load);
+  }
 
   ngOnInit() {
     const routeSub = this.routeState.routes$.subscribe(routes => {
@@ -29,19 +37,13 @@ export class App implements OnInit, OnDestroy {
       this.sortedRoutes = routes;
       this.cdr.detectChanges();
     });
-    this.subscription.add(routeSub);
+    this.subscriptions.add(routeSub);
 
     this.loadRoutes();
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  loadRoutes() {
-    this.routeState.loadRoutes().pipe(
-      finalize(() => console.log('Загрузка завершена'))
-    ).subscribe();
+    this.subscriptions.unsubscribe();
   }
 
   sortData(sort: Sort): void {
