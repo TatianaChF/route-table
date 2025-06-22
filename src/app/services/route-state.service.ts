@@ -10,8 +10,6 @@ export class RouteStateService {
   private routesSubject = new BehaviorSubject<Route[]>([]);
   routes$ = this.routesSubject.asObservable();
 
-  state$ = this.routes$.pipe();
-
   constructor(private routeService: RouteService) {}
 
   loadRoutes(): Observable<Route[]> {
@@ -23,9 +21,5 @@ export class RouteStateService {
         }
       })
     );
-  }
-
-  refresh() {
-    this.loadRoutes().subscribe();
   }
 }

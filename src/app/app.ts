@@ -23,6 +23,14 @@ export class App implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
   ) {}
 
+  loadRoutes() {
+    const load = this.routeState.loadRoutes().pipe(
+      finalize(() => console.log('Загрузка завершена'))
+    ).subscribe();
+
+    this.subscriptions.add(load);
+  }
+
   ngOnInit() {
     const routeSub = this.routeState.routes$.subscribe(routes => {
       this.routes = routes;
@@ -38,13 +46,7 @@ export class App implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  loadRoutes() {
-    this.routeState.loadRoutes().pipe(
-      finalize(() => console.log('Загрузка завершена'))
-    ).subscribe();
-  }
-
-  sortData(sort: Sort) {
+  sortData(sort: Sort): void {
     const data = this.routes.slice();
 
     if (!sort.active || sort.direction === '') {
@@ -57,18 +59,18 @@ export class App implements OnInit, OnDestroy {
 
       switch (sort.active) {
         case 'address':
-          return this.compare(a.address, b.address, isAsc);
-          case 'gateway':
-            return this.compare(b.gateway, b.gateway, isAsc);
-            case 'interface':
-              return this.compare(a.interface, b.interface, isAsc);
+          return this.compare(a.address, b.address, isAsc)
+        case 'gateway':
+          return this.compare(b.gateway, b.gateway, isAsc)
+        case 'interface':
+          return this.compare(a.interface, b.interface, isAsc);
         default:
           return 0;
       }
     })
   }
 
-  compare(a: number | string, b: number | string, isAsc: boolean) {
+  compare(a: number | string, b: number | string, isAsc: boolean): number {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 }
